@@ -28,11 +28,15 @@ public class RestControler {
         }
 
         @RequestMapping(method=POST,value="/password", consumes = "application/json",produces = "application/json")
-        public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDAO dao){
-                JSONObject j = bS.changePassword(dao.username,dao.password);
-                if(j.has("error"))
-                        return new ResponseEntity<>(j.toString(), HttpStatus.NOT_FOUND);
-                return new ResponseEntity<>(j.toString() , HttpStatus.OK);
+        public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDAO dao, @RequestHeader("Authorization") String beamer){
+                if(bS.getSubject(beamer).equalsIgnoreCase(dao.username)){
+                        JSONObject j = bS.changePassword(dao.username,dao.password);
+                        if(j.has("error"))
+                                return new ResponseEntity<>(j.toString(), HttpStatus.NOT_FOUND);
+                        return new ResponseEntity<>(j.toString() , HttpStatus.OK);
+                }else{
+                        return new ResponseEntity<>(new JSONObject().put("Error", "Token username and json username dont match").toString(),HttpStatus.BAD_REQUEST);
+                }
         }
 
         @GetMapping(path="/test")
