@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
-import OurNavBar from './OurNavBar';
+import OurSecondNavBar from './OurSecondNavBar';
 
 class Delete extends Component{
+
+	componentWillMount(){
+		if(localStorage.getItem("username") !== "root")
+			window.location = ("/login");
+			window.alert("Root not logged in")
+	}
 
     delete(e){
 		e.preventDefault();
@@ -18,14 +24,14 @@ class Delete extends Component{
 			}).then((response) =>{
 				return response.json
 			}).then((json) =>{
-				window.location("/login");
+				console.log(json);
 			}).catch((error)=>{alert(error)})
 		}
     
     render(){
        return(
         <div className="div2">
-        <OurNavBar/>
+        <OurSecondNavBar/>
         <div className="horizontalMargin40">
                 <br /><br />
 		        <Form onSubmit={(e)=>this.delete(e)}>
