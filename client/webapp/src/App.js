@@ -6,7 +6,7 @@ import './App.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-
+import Delete from './components/Delete';
 function App() {
 
 
@@ -37,8 +37,8 @@ function App() {
               <Route exact path='/register'>
                 <Register/>
               </Route>
-              <Route exact path='/deleteUser'>
-                <Register/>
+              <Route exact path='/delete'>
+                <Delete/>
               </Route>
           </Switch>
       </BrowserRouter>

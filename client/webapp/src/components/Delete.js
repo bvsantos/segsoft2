@@ -3,13 +3,11 @@ import {Navbar, Nav, Form, Button,NavDropdown} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
 
-class Register extends Component{
+class Delete extends Component{
 
-	registar(e){
+	Delete(e){
 		e.preventDefault();
-		let u = document.getElementById("uName");
-		let pwd1 = document.getElementById("pwd1");
-		let pwd2 = document.getElementById("pwd2");
+		let u = document.getElementById("deleteAcc");
 		if(pwd1.value !== pwd2.value){
 			pwd1.value = ""
 			pwd2.value = ""
@@ -44,30 +42,21 @@ class Register extends Component{
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/login" ><b>Login</b></Nav.Link>
-			  <Nav.Link href="/register" ><b>Register</b></Nav.Link>
-			  <Nav.Link href="/delete" ><b>Delete</b></Nav.Link>
-			</Nav>
+              <Nav.Link href="/register" ><b>Register</b></Nav.Link>
+              <Nav.Link href="/delete" ><b>Delete</b></Nav.Link>
+            </Nav>
           </Navbar.Collapse>
         </Navbar>
         <div className="horizontalMargin40">
                 <br /><br />
 		        <Form onSubmit={(e)=>this.registar(e)}>
 				  <Form.Group >
-				    <Form.Label><b>E-MAIL</b></Form.Label>
-				    <Form.Control id="uName" type="email" placeholder="Enter your username" />
-				  </Form.Group>
-
-				  <Form.Group>
-				    <Form.Label><b>PASSWORD</b></Form.Label>
-				    <Form.Control id="pwd1" type="password" placeholder="Enter your password" />
-				  </Form.Group>
-				  <Form.Group >
-				    <Form.Label><b>RE-ENTER YOUR PASSWORD</b></Form.Label>
-				    <Form.Control id="pwd2" type="password" placeholder="Re-enter your password" />
+				    <Form.Label><b>Account to delete:</b></Form.Label>
+				    <Form.Control id="deleteAcc" placeholder="Enter account to delete" />
 				  </Form.Group>
 				  <center>
 				  <Button type="submit" >
-				    <b>Register</b>
+				    <b>Delete Account</b>
 				  </Button>
 				  </center>
 				</Form>
@@ -76,4 +65,4 @@ class Register extends Component{
        )
     }
 }
-export default Register;
+export default Delete;
