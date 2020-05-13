@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Navbar, Nav, Form, Button, NavDropdown} from 'react-bootstrap';
 import './login.css';
 import '../App.css';
+import OurNavBar from './OurNavBar';
+
 class Login extends Component{
 
     login(e){
@@ -23,16 +25,7 @@ class Login extends Component{
         const bgPurple = {backgroundColor: '#11cef0'}
         return (
             <div className="div2">
-    		<Navbar expand="lg" style={bgPurple}>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-			  <Navbar.Collapse id="basic-navbar-nav">
-			    <Nav className="mr-auto">
-			      <Nav.Link href="/login" ><b>Login</b></Nav.Link>
-			      <Nav.Link href="/register" ><b>Register</b></Nav.Link>
-				  <Nav.Link href="/delete" ><b>Delete</b></Nav.Link>
-				</Nav>
-			  </Navbar.Collapse>
-			</Navbar>
+    		<OurNavBar/>
         	<div className="horizontalMargin40"><br /><br />
                 <Form onSubmit={(e)=>this.login(e)}>
 				  <Form.Group >
