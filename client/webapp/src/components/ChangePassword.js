@@ -6,9 +6,8 @@ import OurNavBar from './OurNavBar';
 
 class ChangePassword extends Component{
 
-	registar(e){
+	changePassword(e){
 		e.preventDefault();
-		let u = document.getElementById("uName");
 		let pwd1 = document.getElementById("pwd1");
 		let pwd2 = document.getElementById("pwd2");
 		if(pwd1.value !== pwd2.value){
@@ -16,22 +15,22 @@ class ChangePassword extends Component{
 			pwd2.value = ""
 			alert("Passwords don't match!")
 		}else{
-			localStorage.setItem("username", u.value);
 			let obj = {
-				"userName": u.value,
+				"username": localStorage.getItem("username"),
 				"password":pwd1.value,
-				"amount": 0
+				"password2":pwd2.value
 			}
 			fetch("register",{
 				headers: {
-      				'Content-Type': 'application/json'
+      				'Content-Type': 'application/json',
+      				'Authorization': localStorage.getItem('bearer')
     			},
 				method: "POST",
 				body:JSON.stringify(obj)
 			}).then((response) =>{
 				return response.json
 			}).then((json) =>{
-				window.location("/login");
+				console.log(json);
 			}).catch((error)=>{alert(error)})
 		}
 	}
@@ -43,11 +42,7 @@ class ChangePassword extends Component{
         <OurNavBar></OurNavBar>
         <div className="horizontalMargin40">
                 <br /><br />
-		        <Form onSubmit={(e)=>this.registar(e)}>
-				  <Form.Group >
-				    <Form.Label><b>E-MAIL</b></Form.Label>
-				    <Form.Control id="uName" type="email" placeholder="Enter your username" />
-				  </Form.Group>
+		        <Form onSubmit={(e)=>this.changePassword(e)}>
 
 				  <Form.Group>
 				    <Form.Label><b>PASSWORD</b></Form.Label>
@@ -59,7 +54,7 @@ class ChangePassword extends Component{
 				  </Form.Group>
 				  <center>
 				  <Button type="submit" >
-				    <b>Register</b>
+				    <b>Update Password</b>
 				  </Button>
 				  </center>
 				</Form>

@@ -7,7 +7,8 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Delete from './components/Delete';
-import ChangePassword from './components/ChangePassword'
+import ChangePassword from './components/ChangePassword';
+import OurNavBar from './components/OurNavBar';
 
 function App() {
 
@@ -16,22 +17,7 @@ function App() {
     <BrowserRouter>
             <Switch>
               <Route exact path="/">
-              <div className="App">
-                <header className="App-header">
-                  <img src={logo} className="App-logo" alt="logo" />
-                  <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                  </p>
-                  <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Learn React
-                  </a>
-                </header>
-              </div>
+                <OurNavBar/>
               </Route>
               <Route exact path='/login'>
                 <Login/>
