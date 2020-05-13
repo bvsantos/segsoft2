@@ -4,7 +4,7 @@
 							"method": "PUT",
 							"value": "/register",
 							"body": {
-										"username": "String".
+										"username": "String",
 										"password": "String",
 										"password2": "String",
 										"roles": ["ROLE_ADMIN","ROLE_USER"] //  um desses dois roles
@@ -31,6 +31,39 @@
 							"Authorization": true,
 							"reply": "ResponseEntity<>(j.toString() , HttpStatus.OK)",
 							"error": "ResponseEntity<>(j.toString(), HttpStatus.NOT_FOUND) || ResponseEntity<>(new JSONObject().put("Error", "Token username and json username dont match").toString(),HttpStatus.BAD_REQUEST)"
-						}
+						},
+			"delete": {
+					  		"method": "delete",
+							"path": "user",
+							"auth": "needed",
+							"reply": "ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK))",
+							"error": "ResponseEntity<>(new JSONObject().put("error","You got no permission to delete this account").toString(),HttpStatus.FORBIDDEN)"
+					  },
+			"logout": {
+					  		"method": "DELETE",
+							"auth": "needed",
+							"reply": "ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK))"
+					  },
+			"account": {
+							"method": "GET",
+							"path": "user",
+							"auth": "needed",
+							"reply": "ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK))",
+							"error": "ResponseEntity<>(new JSONObject().put("error","You got no permission to get information of this account").toString(),HttpStatus.FORBIDDEN)"
+					   },
+			"lock": {
+						"method": "PUT",
+						"path": "user",
+						"auth": "needed",
+						"reply": "ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK))",
+						"error": "ResponseEntity<>(new JSONObject().put("error","You got no permission to lock of this account").toString(),HttpStatus.FORBIDDEN)"
+					},
+			"unlock": {
+						"method": "PUT",
+						"path": "user",
+						"auth": "needed",
+						"reply": "ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK))",
+						"error": "ResponseEntity<>(new JSONObject().put("error","You got no permission to unlock this account").toString(),HttpStatus.FORBIDDEN)"
+					  }
 		]
 }
