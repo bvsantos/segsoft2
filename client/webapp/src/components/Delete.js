@@ -11,7 +11,8 @@ class Delete extends Component{
 		let accName = document.getElementById("deleteAcc");
 			fetch("/delete?user="+accName.value,{
 				headers: {
-      				'Content-Type': 'application/json'
+					  'Content-Type': 'application/json',
+					  "Authorization":localStorage.getItem("bearer")
     			},
 				method: "DELETE"
 			}).then((response) =>{
