@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
-import OurNavBar from './OurNavBar';
+import OurSecondNavBar from './OurSecondNavBar';
 
 class ChangePassword extends Component{
+
+	componentWillMount(){
+		if(localStorage.getItem("username") !== "")
+			window.location = ("/login");
+			window.alert("No user logged in!")
+	}
 
 	changePassword(e){
 		e.preventDefault();
@@ -38,7 +44,7 @@ class ChangePassword extends Component{
     render(){
        return(
         <div className="div2">
-        <OurNavBar></OurNavBar>
+        <OurSecondNavBar/>
         <div className="horizontalMargin40">
                 <br /><br />
 		        <Form onSubmit={(e)=>this.changePassword(e)}>
