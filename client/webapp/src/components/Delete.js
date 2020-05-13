@@ -6,6 +6,23 @@ import OurNavBar from './OurNavBar';
 
 class Delete extends Component{
 
+    delete(e){
+		e.preventDefault();
+		let accName = document.getElementById("deleteAcc");
+			fetch("/delete?user="+accName.value,{
+				headers: {
+      				'Content-Type': 'application/json'
+    			},
+				method: "DELETE",
+				body:JSON.stringify(obj)
+			}).then((response) =>{
+				return response.json
+			}).then((json) =>{
+				window.location("/login");
+			}).catch((error)=>{alert(error)})
+		}
+    }
+    
     render(){
         const bgPurple = {backgroundColor: '#11cef0'}
        return(
@@ -13,7 +30,7 @@ class Delete extends Component{
         <OurNavBar/>
         <div className="horizontalMargin40">
                 <br /><br />
-		        <Form onSubmit={(e)=>this.registar(e)}>
+		        <Form onSubmit={(e)=>this.delete(e)}>
 				  <Form.Group >
 				    <Form.Label><b>Account to delete:</b></Form.Label>
 				    <Form.Control id="deleteAcc" placeholder="Enter account to delete" />

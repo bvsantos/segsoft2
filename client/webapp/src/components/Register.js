@@ -19,8 +19,7 @@ class Register extends Component{
 			localStorage.setItem("username", u.value);
 			let obj = {
 				"userName": u.value,
-				"password":pwd1.value,
-				"amount": 0
+				"password":pwd1.value
 			}
 			fetch("register",{
 				headers: {
