@@ -3,9 +3,20 @@ import {Navbar, Nav, Form, Button, NavDropdown} from 'react-bootstrap';
 import './login.css';
 import '../App.css';
 class Login extends Component{
+
     login(e){
 		e.preventDfault();
-    }
+		let username = document.getElementById("username";
+		let pwd = document.getElementById("pwd");
+		fetch("/login",{
+			headers: {
+				  'Content-Type': 'application/json'
+			},
+			method: "POST",
+			body:JSON.stringify({username:u.value,password:pwd.value})})
+	.then((response)=>{localStorage.setItem("username", u.value);localStorage.setItem("auth",response.headers.get("authorization"));location.replace("http://localhost:3000/changepass")})
+	.catch((error)=>{pwd.value="";alert(error.text())})
+}
     
     render() {
         const bgPurple = {backgroundColor: '#11cef0'}
@@ -24,11 +35,11 @@ class Login extends Component{
                 <Form onSubmit={(e)=>this.login(e)}>
 				  <Form.Group >
 				    <Form.Label><b>E-MAIL</b></Form.Label>
-				    <Form.Control id="uName" type="email" placeholder="Enter your username" />
+				    <Form.Control id="username" type="email" placeholder="Enter your username" />
 				  </Form.Group>
 				  <Form.Group >
 				    <Form.Label><b>PASSWORD</b></Form.Label>
-				    <Form.Control id="pw1" type="password" placeholder="Enter your password" />
+				    <Form.Control id="pwd" type="password" placeholder="Enter your password" />
 				  </Form.Group>
 				  <center>
 				  <Button type="submit" >
