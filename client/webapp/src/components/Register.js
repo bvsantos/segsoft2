@@ -18,14 +18,15 @@ class Register extends Component{
 		}else{
 			localStorage.setItem("username", u.value);
 			let obj = {
-				"userName": u.value,
+				"username": u.value,
 				"password":pwd1.value
 			}
-			fetch("register",{
+			fetch("/register",{
 				headers: {
-      				'Content-Type': 'application/json'
+					  'Content-Type': 'application/json',
+					  "Authorization":localStorage.getItem("bearer")
     			},
-				method: "POST",
+				method: "PUT",
 				body:JSON.stringify(obj)
 			}).then((response) =>{
 				return response.json
