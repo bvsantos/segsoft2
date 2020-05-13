@@ -13,7 +13,24 @@
 							"error": "ResponseEntity<>("A client already exists with the name "+ dao.userName , HttpStatus.CONFLICT)"
 						},
 			"login": {
-						
-					}
+					 	"method": "POST",
+						"body": {
+									"username": "String",
+									"password": "String"
+								},
+						"reply": "200 OK & Authorization: Bearer ...",
+						"error": "HttpStatus.Forbiden"
+					 },
+			"password": {
+							"method": "POST",
+							"body": {
+										"username": "String",
+										"password": "String",
+										"password2": "String"
+									},
+							"Authorization": true,
+							"reply": "ResponseEntity<>(j.toString() , HttpStatus.OK)",
+							"error": "ResponseEntity<>(j.toString(), HttpStatus.NOT_FOUND) || ResponseEntity<>(new JSONObject().put("Error", "Token username and json username dont match").toString(),HttpStatus.BAD_REQUEST)"
+						}
 		]
 }
