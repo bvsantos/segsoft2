@@ -1,0 +1,19 @@
+{
+	"/":[
+			"register": {
+							"method": "PUT",
+							"value": "/register",
+							"body": {
+										"username": "String".
+										"password": "String",
+										"password2": "String",
+										"roles": ["ROLE_ADMIN","ROLE_USER"] //  um desses dois roles
+									},
+							"reply": "ResponseEntity<>("Created a new account for "+ dao.userName , HttpStatus.OK)",
+							"error": "ResponseEntity<>("A client already exists with the name "+ dao.userName , HttpStatus.CONFLICT)"
+						},
+			"login": {
+						
+					}
+		]
+}
