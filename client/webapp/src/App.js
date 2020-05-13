@@ -6,6 +6,7 @@ import './App.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
+import ChangePassword from './components/ChangePassword'
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
               </Route>
               <Route exact path='/deleteUser'>
                 <Register/>
+              </Route>
+              <Route exath path='/changepassword'>
+                <ChangePassword/>
               </Route>
           </Switch>
       </BrowserRouter>

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {Navbar, Nav, Form, Button,NavDropdown} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
-import OurNavBar from './OurNavBar';
 
-class Register extends Component{
+class ChangePassword extends Component{
 
 	registar(e){
 		e.preventDefault();
@@ -40,7 +39,15 @@ class Register extends Component{
         const bgPurple = {backgroundColor: '#11cef0'}
        return(
         <div className="div2">
-        <OurNavBar/>
+        <Navbar expand="lg" style={bgPurple}>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/login" ><b>Login</b></Nav.Link>
+              <Nav.Link href="/register" ><b>Register</b></Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         <div className="horizontalMargin40">
                 <br /><br />
 		        <Form onSubmit={(e)=>this.registar(e)}>
@@ -68,4 +75,4 @@ class Register extends Component{
        )
     }
 }
-export default Register;
+export default ChangePassword;
