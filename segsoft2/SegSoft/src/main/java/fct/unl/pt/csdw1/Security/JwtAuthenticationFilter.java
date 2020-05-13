@@ -5,11 +5,14 @@ import fct.unl.pt.csdw1.Daos.LoginDao;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -36,10 +39,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         JSONObject json = null;
         try {
             jsonString = request.getReader().lines().collect(Collectors.joining());
-            System.out.println(request.getPathInfo());
             json = new JSONObject(jsonString);
         } catch (IOException e) {
-            e.printStackTrace();
+
+        }catch(JSONException e1){
+            return null;
         }
         if(json.has("username") && json.has("password")) {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(json.getString("username"), json.get("password"));

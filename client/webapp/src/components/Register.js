@@ -6,10 +6,9 @@ import OurSecondNavBar from './OurSecondNavBar';
 
 class Register extends Component{
 
-	componentWillMount(){
+	componentDidMount(){
 		if(localStorage.getItem("username") !== "root"){
 			window.alert("Root not logged in");
-			
 			window.location="http://localhost:3000/login";
 		}
 			
@@ -25,10 +24,11 @@ class Register extends Component{
 			pwd2.value = ""
 			alert("Passwords don't match!")
 		}else{
-			localStorage.setItem("username", u.value);
 			let obj = {
-				"username": u.value,
-				"password":pwd1.value
+				"userName": u.value,
+				"password":pwd1.value,
+				"password2": pwd2.value,
+				"roles": ["ROLE_USER"]
 			}
 			fetch("/register",{
 				headers: {

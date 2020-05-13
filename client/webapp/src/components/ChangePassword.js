@@ -6,10 +6,11 @@ import OurSecondNavBar from './OurSecondNavBar';
 
 class ChangePassword extends Component{
 
-	componentWillMount(){
-		if(localStorage.getItem("username") !== "")
-			window.location = ("/login");
+	componentDidMount(){
+		if(localStorage.getItem("username") === null){
 			window.alert("No user logged in!")
+			window.location = ("/login");
+		}
 	}
 
 	changePassword(e){
@@ -26,7 +27,7 @@ class ChangePassword extends Component{
 				"password":pwd1.value,
 				"password2":pwd2.value
 			}
-			fetch("register",{
+			fetch("password",{
 				headers: {
       				'Content-Type': 'application/json',
       				'Authorization': localStorage.getItem('bearer')
@@ -37,6 +38,9 @@ class ChangePassword extends Component{
 				return response.json
 			}).then((json) =>{
 				console.log(json);
+				pwd1.value = ""
+				pwd2.value = ""
+				alert(JSON.stringify(json))
 			}).catch((error)=>{alert(error)})
 		}
 	}

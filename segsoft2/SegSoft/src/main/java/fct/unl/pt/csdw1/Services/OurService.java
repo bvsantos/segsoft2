@@ -26,10 +26,21 @@ public class OurService {
     public OurEntity registerUser(String userName, String password,String password2, String[] roles){
         if(!ourRepo.findByUserName(userName).isPresent() && password.equals(password2)) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            for (String element: roles) {
+                System.out.println(element);
+            }
             return ourRepo.save(new OurEntity(userName, passwordEncoder.encode(password),passwordEncoder.encode(password2),roles));
         }
         else
             return null;
+    }
+
+    public void createRootIfNeeded(){
+        Optional<OurEntity> be = ourRepo.findByUserName("root");
+        if(!be.isPresent()){
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            ourRepo.save(new OurEntity("root",passwordEncoder.encode("root"),passwordEncoder.encode("root"), new String[] {"ROLE_ADMIN"}));
+        }
     }
 
     public JSONObject changePassword(String who,String password,String password2){
@@ -100,8 +111,10 @@ public class OurService {
     }
 
     public JSONObject lock(String username){
+        System.out.println(username);
         Optional<OurEntity> be = ourRepo.findByUserName(username);
         if(be.isPresent()){
+            System.out.println("exist");
             OurEntity b = be.get();
             b.lock();
             ourRepo.save(b);

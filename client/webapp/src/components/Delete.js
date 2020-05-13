@@ -6,10 +6,11 @@ import OurSecondNavBar from './OurSecondNavBar';
 
 class Delete extends Component{
 
-	componentWillMount(){
-		if(localStorage.getItem("username") !== "root")
-			window.location = ("/login");
-			window.alert("Root not logged in")
+	componentDidMount(){
+		if(localStorage.getItem("username") !== "root"){
+					window.alert("Root not logged in")
+					window.location = ("/login");
+				}
 	}
 
     delete(e){

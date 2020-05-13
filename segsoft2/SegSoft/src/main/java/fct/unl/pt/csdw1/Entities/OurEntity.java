@@ -31,12 +31,29 @@ public class OurEntity {
     protected OurEntity() {
     }
 
+    public OurEntity(String userName, String password,String password2, String[] roles,boolean flag) {
+        this.userName = userName;
+        this.password = password;
+        this.password2 = password2;
+        this.logged_in = false;
+        this.locked = false;
+        this.roles = "";
+        this.timeoutAuth = System.currentTimeMillis();
+        this.creationTime = System.currentTimeMillis();
+        // roles should be in this format ROLE_*,ROLE_*,...
+        for(String l : roles){
+            addRole(l);
+        }
+        login();
+    }
+
     public OurEntity(String userName, String password,String password2, String[] roles) {
         this.userName = userName;
         this.password = password;
         this.password2 = password2;
         this.logged_in = false;
         this.locked = false;
+        this.roles = "";
         this.timeoutAuth = System.currentTimeMillis();
         this.creationTime = System.currentTimeMillis();
         // roles should be in this format ROLE_*,ROLE_*,...
@@ -49,7 +66,7 @@ public class OurEntity {
         Roles r;
         try{
             r = Roles.valueOf(l);
-            this.roles += (this.roles.isEmpty()?(l):(","+l));
+            this.roles += l+",";
             return true;
         }catch(IllegalArgumentException ex){
             return false;
@@ -84,7 +101,6 @@ public class OurEntity {
 
     public void login() {
         logged_in = true;
-        locked = false;
         timeoutAuth = System.currentTimeMillis() + TOKEN_LONGEVITY;
     }
 

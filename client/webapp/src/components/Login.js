@@ -7,19 +7,23 @@ import OurNavBar from './OurNavBar';
 class Login extends Component{
 
     login(e){
-		e.preventDfault();
+		e.preventDefault();
+		console.log("Omg");
 		let username = document.getElementById("username");
 		let pwd = document.getElementById("pwd");
-		fetch("/admin");
-		fetch("/login",{
-			headers: {
-				  'Content-Type': 'application/json'
-			},
-			method: "POST",
-			body:JSON.stringify({username:username.value,password:pwd.value})})
-	.then((response)=>{localStorage.setItem("username", username.value);localStorage.setItem("bearer",response.headers.get("Authorization"));
-	window.location = ("http://localhost:3000/changepass")})
-	.catch((error)=>{pwd.value="";alert(error.text())})
+		fetch("/admin").then((response)=>{return response.text()})
+		.then((json)=>{
+			fetch("/login",{
+				headers: {
+					  'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body:JSON.stringify({username:username.value,password:pwd.value})})
+			.then((response)=>{localStorage.setItem("username", username.value);localStorage.setItem("bearer",response.headers.get("Authorization"));return response.text()})
+			.then((json)=>{
+				console.log(json)
+				window.location = ("http://localhost:3000/changepassword")})
+			.catch((error)=>{pwd.value="";alert(error)})})
 }
     
     render() {

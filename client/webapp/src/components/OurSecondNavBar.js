@@ -5,8 +5,15 @@ import '../App.css';
 class OurSecondNavBar extends Component{
 
     logout(){
+        fetch("logoff",{
+        headers: {
+            "Authorization":localStorage.getItem("bearer")
+          },
+        method: "DELETE"
+      }).then((response) =>{
         localStorage.clear();
         window.location = ("/login");
+      })
     }
     
     render() {
@@ -20,7 +27,7 @@ class OurSecondNavBar extends Component{
 				  <Nav.Link href="/delete" ><b>Delete</b></Nav.Link>
 				  <Nav.Link href="/changepassword" ><b>Change Pass</b></Nav.Link>
                   <div onClick = {this.logout}>
-                  <Nav.Link href="/logout" ><b>Logout</b></Nav.Link>
+                  <Nav.Link href="#" ><b>Logout</b></Nav.Link>
                   </div>
 			      
 			    </Nav>

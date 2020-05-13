@@ -12,17 +12,20 @@ import java.util.Optional;
 
 public class MyUserDetails implements UserDetails {
 
+    private OurRepo ourRepo;
+
     private OurEntity e1;
 
 
     public MyUserDetails(String userName,final OurRepo ourRepo){
         Optional<OurEntity> e = ourRepo.findByUserName(userName);
         this.e1 = e.isPresent()?e.get():null;
+        this.ourRepo = ourRepo;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return e1.getRoles();
     }
 
     @Override
@@ -42,16 +45,21 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.e1!=null?this.e1.getLocked():false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.e1!=null?this.e1.checkIfTokenExpired():false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void login(){
+        e1.login();
+        ourRepo.save(e1);
     }
 }
