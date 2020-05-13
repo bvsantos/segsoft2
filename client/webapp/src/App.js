@@ -8,6 +8,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 function App() {
+
+
   return (
     <BrowserRouter>
             <Switch>
@@ -33,6 +35,9 @@ function App() {
                 <Login/>
               </Route>
               <Route exact path='/register'>
+                <Register/>
+              </Route>
+              <Route exact path='/deleteUser'>
                 <Register/>
               </Route>
           </Switch>
