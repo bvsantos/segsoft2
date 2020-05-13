@@ -12,13 +12,12 @@ import java.util.Optional;
 
 public class MyUserDetails implements UserDetails {
 
-    private String userName;
-    private String passWord;
+    private OurEntity e1;
+
 
     public MyUserDetails(String userName,final OurRepo ourRepo){
-        this.userName = userName;
         Optional<OurEntity> e = ourRepo.findByUserName(userName);
-        this.passWord = e.isPresent()?e.get().getPassword():null;
+        this.e1 = e.isPresent()?e.get():null;
     }
 
     @Override
@@ -28,12 +27,12 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.passWord;
+        return this.e1!=null?this.e1.getPassword():null;
     }
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.e1!=null?this.e1.getOwnerName():null;
     }
 
     @Override
@@ -43,12 +42,12 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.e1!=null?this.e1.getLocked():false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.e1!=null?this.e1.checkIfTokenExpired():false;
     }
 
     @Override
