@@ -11,7 +11,6 @@ class OurNavBar extends Component{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 			  <Navbar.Collapse id="basic-navbar-nav">
 			    <Nav className="mr-auto">
-					(localStorage.getItem("username") === "")
 			      <Nav.Link href="/login" ><b>Login</b></Nav.Link>
 			      <Nav.Link href="/register" ><b>Register</b></Nav.Link>
 				  <Nav.Link href="/delete" ><b>Delete</b></Nav.Link>
