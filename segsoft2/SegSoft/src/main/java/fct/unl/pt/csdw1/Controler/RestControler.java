@@ -49,8 +49,13 @@ public class RestControler {
         public ResponseEntity<String> deleteAccount(@RequestHeader("Authorization") String beamer,@RequestParam("user") String username){
                 String u = bS.getSubject(beamer);
                 if(username.equalsIgnoreCase(u) || bS.checkIfAdmin(u)){
-                        JSONObject j = bS.delete(username);
-                        return new ResponseEntity<>(j.toString(),j.has("error")?(HttpStatus.BAD_REQUEST):(HttpStatus.OK));
+                        JSONObject j = bS.lock(username);
+                        if(j.has("error"))
+                                return new ResponseEntity<>(j.toString(),HttpStatus.BAD_REQUEST);
+                        else {
+                                j = bS.delete(username);
+                                return new ResponseEntity<>(j.toString(), j.has("error") ? (HttpStatus.BAD_REQUEST) : (HttpStatus.OK));
+                        }
                 }else{
                         return new ResponseEntity<>(new JSONObject().put("error","You got no permission to delete this account").toString(),HttpStatus.FORBIDDEN);
                 }
