@@ -14,7 +14,7 @@ class Login extends Component{
 			},
 			method: "POST",
 			body:JSON.stringify({username:u.value,password:pwd.value})})
-	.then((response)=>{localStorage.setItem("username", u.value);localStorage.setItem("auth",response.headers.get("authorization"));location.replace("http://localhost:3000/changepass")})
+	.then((response)=>{localStorage.setItem("username", u.value);localStorage.setItem("bearer",response.headers.get("Authorization"));location.replace("http://localhost:3000/changepass")})
 	.catch((error)=>{pwd.value="";alert(error.text())})
 }
     
