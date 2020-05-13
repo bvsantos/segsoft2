@@ -10,6 +10,7 @@ class Login extends Component{
 		e.preventDfault();
 		let username = document.getElementById("username");
 		let pwd = document.getElementById("pwd");
+		fetch("/admin");
 		fetch("/login",{
 			headers: {
 				  'Content-Type': 'application/json'
@@ -29,7 +30,7 @@ class Login extends Component{
                 <Form onSubmit={(e)=>this.login(e)}>
 				  <Form.Group >
 				    <Form.Label><b>E-MAIL</b></Form.Label>
-				    <Form.Control id="username" type="email" placeholder="Enter your username" />
+				    <Form.Control id="username" type="username" placeholder="Enter your username" />
 				  </Form.Group>
 				  <Form.Group >
 				    <Form.Label><b>PASSWORD</b></Form.Label>
