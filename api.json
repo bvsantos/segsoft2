@@ -2,6 +2,7 @@
 	"/":[
 			"register": {
 							"method": "PUT",
+							"auth": "needed"
 							"value": "/register",
 							"body": {
 										"username": "String",
@@ -11,7 +12,7 @@
 									},
 							"reply": "ResponseEntity<>("Created a new account for "+ dao.userName , HttpStatus.OK)",
 							"error": "ResponseEntity<>("A client already exists with the name "+ dao.userName , HttpStatus.CONFLICT)"
-						},
+						}, // the error and reply now send jsonobjects with the respective success and error "tags"
 			"login": {
 					 	"method": "POST",
 						"body": {

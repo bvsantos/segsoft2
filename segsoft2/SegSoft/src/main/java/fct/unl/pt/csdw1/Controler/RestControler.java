@@ -26,11 +26,15 @@ public class RestControler {
                 return new ResponseEntity<>(new JSONObject().put("Application Status", "Running").toString(), HttpStatus.OK);
         }
 
-        @RequestMapping(method=PUT,value="/register",consumes = "application/json")
-        public ResponseEntity<String> createNew(@RequestBody RegisterDao dao){
-                if(bS.registerUser(dao.userName,dao.password,dao.password2,dao.roles) == null)
-                        return new ResponseEntity<>("A client already exists with the name "+ dao.userName , HttpStatus.CONFLICT);
-                return new ResponseEntity<>("Created a new account for "+ dao.userName , HttpStatus.OK);
+        @RequestMapping(method=PUT,value="/register",consumes = "application/json", produces="application/json")
+        public ResponseEntity<String> createNew(@RequestBody RegisterDao dao, @RequestHeader("Authorization") String beamer){
+                if(bS.checkIfAdmin(bS.getSubject(beamer))) {
+                        if (bS.registerUser(dao.userName, dao.password, dao.password2, dao.roles) == null)
+                                return new ResponseEntity<>("A client already exists with the name " + dao.userName, HttpStatus.CONFLICT);
+                        return new ResponseEntity<>(new JSONObject().put("Success","Created a new account for " + dao.userName).toString(), HttpStatus.OK);
+                }else{
+                        return new ResponseEntity<>(new JSONObject().put("error","You got no permission to create this account").toString(),HttpStatus.FORBIDDEN);
+                }
         }
 
         @RequestMapping(method=POST,value="/password", consumes = "application/json",produces = "application/json")
