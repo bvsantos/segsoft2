@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
 
 import Login from './components/Login';

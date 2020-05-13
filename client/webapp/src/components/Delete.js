@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, Form, Button,NavDropdown} from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
 import OurNavBar from './OurNavBar';
@@ -13,18 +13,15 @@ class Delete extends Component{
 				headers: {
       				'Content-Type': 'application/json'
     			},
-				method: "DELETE",
-				body:JSON.stringify(obj)
+				method: "DELETE"
 			}).then((response) =>{
 				return response.json
 			}).then((json) =>{
 				window.location("/login");
 			}).catch((error)=>{alert(error)})
 		}
-    }
     
     render(){
-        const bgPurple = {backgroundColor: '#11cef0'}
        return(
         <div className="div2">
         <OurNavBar/>

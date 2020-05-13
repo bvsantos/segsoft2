@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, Form, Button,NavDropdown} from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 import './login.css'
 import '../App.css';
 import OurNavBar from './OurNavBar';
@@ -36,7 +36,6 @@ class Register extends Component{
 	}
 
     render(){
-        const bgPurple = {backgroundColor: '#11cef0'}
        return(
         <div className="div2">
         <OurNavBar/>
